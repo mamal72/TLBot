@@ -36,9 +36,8 @@ function handleCommands(bot, msg) {
   // Get command name
   let command = getCommand(rawCommand);
 
-  // If the command is invalid
-  if (!commandsHelper.getCommands(command)) {
-    //bot.sendMessage(msg.chat.id, `COMMAND ${command} NOT FOUND! :(`);
+  // If the command is invalid and it's not in a group (fix multiple bots problem)
+  if (!commandsHelper.getCommands(command) && msg.chat.id > 0) {
     bot.sendMessage(msg.chat.id, `Command ${command} not found!
 Use /help command to get help about.`);
     return false;
