@@ -21,7 +21,7 @@ Example: /dest fr`
     command: 'swp',
     params: [],
     usage: `Swap source and destination languages
-Example /swp`
+Example: /swp`
   },
   {
     command: 'help',
