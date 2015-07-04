@@ -1,0 +1,29 @@
+{
+  "name": "TLBot",
+  "version": "1.0.0",
+  "description": "Telegram @TLBot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified!\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mamal72/TLBot"
+  },
+  "keywords": [
+    "Telegram",
+    "Bot",
+    "Translate"
+  ],
+  "author": "Mohamad Jahani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mamal72/TLBot/issues"
+  },
+  "homepage": "https://github.com/mamal72/TLBot",
+  "dependencies": {
+    "babel": "^5.6.14",
+    "node-telegram-bot-api": "^0.4.0",
+    "restler": "^3.3.0"
+  }
+}
