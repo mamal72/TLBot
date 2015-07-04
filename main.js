@@ -38,7 +38,7 @@ function handleCommands(bot, msg) {
 
   // If the command is invalid
   if (!commandsHelper.getCommands(command)) {
-    //It's not in a group (fix multiple bots problem)
+    //It's in a group (fix multiple bots problem)
     if (msg.chat.id > 0) {
       bot.sendMessage(msg.chat.id, `Command ${command} not found!
 Use /help command to get help about.`);
