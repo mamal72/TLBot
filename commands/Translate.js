@@ -65,20 +65,43 @@ Destination: ${src}`;
 
 export default class Translate {
   static tl(params) {
-    let sourceLang = 'fa',
-        destinationLang = 'en',
-        userId = params.userId,
-        text = params.params;
 
-    let users = read('users');
+    let userId = params.userId,
+        text = params.params,
+        sourceLang = undefined,
+        destinationLang = undefined;
 
-    for (var i = 0, max = users.length; i < max; i++) {
-      if (users[i].id === userId) {
-        destinationLang = users[i].destination;
-        sourceLang = users[i].source;
-        break;
+    // read src,dest from params
+    let lang = text.split(' ').shift();
+    if(lang.indexOf(':')) {
+      let tmp = lang.split(':');
+      if (tmp.length === 2) {
+        sourceLang = tmp[0];
+        destinationLang = tmp[1];
+        text = text.replace(lang+' ','');
       }
     }
+
+    if (!destinationLang) {
+      // read user config
+      let users = read('users');
+
+      for (var i = 0, max = users.length; i < max; i++) {
+        if (users[i].id === userId) {
+          destinationLang = users[i].destination;
+          sourceLang = users[i].source;
+          break;
+        }
+      }
+
+      // default
+      if (!destinationLang) {
+        sourceLang = 'en';
+        destinationLang = 'fa';
+      }
+
+    }
+
 
     let query = {
       q: text,
