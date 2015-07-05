@@ -6,6 +6,12 @@ const commands = [
 Example: /tl mother`
   },
   {
+    command: 'tl',
+    params: ['src:desc','text'],
+    usage: `Translate text
+Example: /tl en:fa mother`
+  },
+  {
     command: 'src',
     params: ['source language'],
     usage: `Set source language
