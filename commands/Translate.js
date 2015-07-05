@@ -5,6 +5,16 @@ import * as commandsHelper from '../utils/commands';
 
 const BASE_API_ADDRESS = 'http://mymemory.translated.net/api/get';
 
+function unescapeHtml(text) {
+  return text
+      .replace("&amp;", "&")
+      .replace("&lt;", "<")
+      .replace("&gt;", ">")
+      .replace("&quot;", '"')
+      .replace("&#039;", "'")
+      .replace("&#39;", "'");
+}
+
 function changeUserData(userId, data) {
   let users = read('users');
 
@@ -99,7 +109,7 @@ export default class Translate {
             break;
           }
         }
-        return res(tl);
+        return res(unescapeHtml(tl));
       });
     })
   }

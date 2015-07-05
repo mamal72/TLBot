@@ -25,7 +25,7 @@ function getCommand(command) {
 
 function handleCommands(bot, msg) {
 
-  // It's not a command
+  // It's not a comma nd
   if (!msg.text || !msg.text.indexOf('/') === 0) {
     return false;
   }
@@ -47,7 +47,7 @@ Use /help command to get help about.`);
   }
 
   let params = getParams(rawCommand, true);
-  Translate[command]({userId: msg.chat.id, params: params}).then(response => {
+  command && Translate[command]({userId: msg.chat.id, params: params}).then(response => {
     bot.sendMessage(msg.chat.id, response);
   });
 
