@@ -7,8 +7,8 @@ Example: /tl mother`
   },
   {
     command: 'tl',
-    params: ['src:desc','text'],
-    usage: `Translate text
+    params: ['src:dest','text'],
+    usage: `Translate text from src to dest
 Example: /tl en:fa mother`
   },
   {
