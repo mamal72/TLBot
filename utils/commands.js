@@ -37,8 +37,15 @@ Example: /swp`
 ];
 
 function buildHelp(command) {
-  return `/${command.command} ${command.params.length ? '[ ' + command.params.join(' ') + ' ]' : ''} - ${command.usage}
+  let helpText = `/${command.command}`;
+  if (command.params.length) {
+    command.params.forEach(param => {
+      helpText += ` [ ${param} ] `;
+    })
+  }
+  helpText += ` - ${command.usage}
 `;
+  return helpText;
 }
 
 function helpAll() {

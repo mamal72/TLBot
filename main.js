@@ -3,7 +3,24 @@ import config from './config'
 import * as commandsHelper from './utils/commands';
 import Translate from './commands/Translate';
 
-const bot = new TelegramBot(config.apiKey, {polling: true});
+const bot = new TelegramBot(config.apiKey, {
+  polling: {
+    timeout: config.pollingTimeout
+  }
+});
+
+bot.getMe().then(me => {
+  bot.info = me;
+  console.log(`
+-----------------------------
+@${me.username} started!
+${me.first_name}
+#${me.id}
+-----------------------------
+`);
+}).catch(err => {
+  console.error(err);
+})
 
 bot.on('message', msg => {
   handleCommands(bot, msg);
@@ -20,7 +37,7 @@ function getParams(command, single = false) {
 }
 
 function getCommand(command) {
-  return command.replace('@TLBot', '').split(' ').shift().substr(1);
+  return command.replace(`@${bot.info.username}`, '').split(' ').shift().substr(1);
 }
 
 function handleCommands(bot, msg) {
