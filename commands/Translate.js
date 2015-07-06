@@ -18,17 +18,13 @@ function unescapeHtml(text) {
 function changeUserData(userId, data) {
   let users = read('users');
 
-  // Find user in config
-  let user = undefined;
-  for (let i = 0, max = users.length; i < max; i++) {
-    if (users[i].id === userId) {
-      user = i;
-      break;
-    }
-  }
+  // Find user in store
+  let user = users.findIndex(tmpUser => {
+    return tmpUser.id == userId;
+  });
 
   // If it's already there!
-  if (user !== undefined) {
+  if (user !== -1) {
     users[user] = Object.assign(users[user], data);
   } else {
     users.push(Object.assign({id: userId}, data));
@@ -39,17 +35,13 @@ function changeUserData(userId, data) {
 function swapLang(userId) {
   let users = read('users');
 
-  // Find user in config
-  let user = undefined;
-  for (let i = 0, max = users.length; i < max; i++) {
-    if (users[i].id === userId) {
-      user = i;
-      break;
-    }
-  }
+  // Find user in store
+  let user = users.findIndex(tmpUser => {
+    return tmpUser.id == userId;
+  });
 
   // If it's already there!
-  if (user !== undefined) {
+  if (user !== -1) {
     let src = users[user].source;
     let dst = users[user].destination;
     users[user].source = dst;
@@ -73,12 +65,12 @@ export default class Translate {
 
     // read src,dest from params
     let lang = text.split(' ').shift();
-    if(lang.indexOf(':')) {
+    if (lang.indexOf(':')) {
       let tmp = lang.split(':');
       if (tmp.length === 2) {
         sourceLang = tmp[0];
         destinationLang = tmp[1];
-        text = text.replace(lang+' ','');
+        text = text.replace(lang + ' ', '');
       }
     }
 
@@ -86,18 +78,18 @@ export default class Translate {
       // read user config
       let users = read('users');
 
-      for (var i = 0, max = users.length; i < max; i++) {
-        if (users[i].id === userId) {
-          destinationLang = users[i].destination;
-          sourceLang = users[i].source;
-          break;
-        }
-      }
+      let user = users.find(tmpUser => {
+        return tmpUser.id === userId;
+      });
 
       // default
-      if (!destinationLang) {
+      if (!user) {
         sourceLang = 'en';
         destinationLang = 'fa';
+      } else {
+        console.log(user);
+        sourceLang = user.source;
+        destinationLang = user.destination;
       }
 
     }
@@ -121,6 +113,9 @@ export default class Translate {
         let tl = 'Nothing found. :(';
         let maxQuality = 0;
         let maxMatch = 0;
+        if (!response.matches) {
+          return rej('Oops!');
+        }
         for (let i = 0, max = response.matches.length; i < max; i++) {
           if (response.matches[i].match > maxMatch && response.matches[i].quality > maxQuality) {
             maxQuality = response.matches[i].quality;

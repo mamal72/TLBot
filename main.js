@@ -37,7 +37,11 @@ function getParams(command, single = false) {
 }
 
 function getCommand(command) {
-  return command.replace(`@${bot.info.username}`, '').split(' ').shift().substr(1);
+  if (bot.info) {
+    return command.replace(`@${bot.info.username}`, '').split(' ').shift().substr(1);
+  } else {
+    return command.split(' ').shift().substr(1);
+  }
 }
 
 function handleCommands(bot, msg) {
