@@ -174,6 +174,7 @@ export default class Translate {
         message = params.params;
     bot.sendMessage(config.masterId, `New feedback from
 ${user.first_name || ''} ${user.last_name || ''} @${user.username || ''} <#${user.id}>
+----------
 ${message}`);
     return new Promise((res, rej) => {
       res('Thank you so much for giving us your feedback! ^^');
