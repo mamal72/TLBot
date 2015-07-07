@@ -88,7 +88,6 @@ export default class Translate {
         sourceLang = 'en';
         destinationLang = 'fa';
       } else {
-        console.log(user);
         sourceLang = user.source;
         destinationLang = user.destination;
       }
