@@ -1,6 +1,7 @@
 import restler from 'restler';
 import {read, write} from '../utils/files';
 import * as commandsHelper from '../utils/commands';
+import config from '../config';
 
 
 const BASE_API_ADDRESS = 'http://mymemory.translated.net/api/get';
@@ -166,6 +167,16 @@ export default class Translate {
     return new Promise((res, rej) => {
       res(commandsHelper.help(command));
     });
+  }
+
+  static feedback(params) {
+    let user = params.user,
+        bot = params.bot,
+        message = params.params;
+    bot.sendMessage(config.masterId, message);
+    return new Promise((res, rej) => {
+      res('Thank you so much for giving us your feedback! ^^');
+    })
   }
 
 }

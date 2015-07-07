@@ -68,7 +68,7 @@ Use /help command to get help about.`);
   }
 
   let params = getParams(rawCommand, true);
-  command && Translate[command]({userId: msg.chat.id, params: params}).then(response => {
+  command && Translate[command]({user: msg.from, bot: bot, userId: msg.chat.id, params: params}).then(response => {
     bot.sendMessage(msg.chat.id, response);
   });
 

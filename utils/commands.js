@@ -33,6 +33,12 @@ Example: /swp`
     command: 'help',
     params: ['command name (optional)'],
     usage: 'Get help about all or specified command'
+  },
+  {
+    command: 'feedback',
+    params: ["message"],
+    usage: `Send your feedback message to us!
+Example: /feedback this bot rocks! |m|`
   }
 ];
 
