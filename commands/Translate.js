@@ -1,7 +1,7 @@
-import restler from 'restler';
-import {read, write} from '../utils/files';
-import * as commandsHelper from '../utils/commands';
-import config from '../config';
+import restler${spaceForNamedImports} from 'restler'
+import config${spaceForNamedImports} from '../config'
+import * as commandsHelper${spaceForNamedImports} from '../utils/commands'
+import { read, write } from '../utils/files'
 
 
 const BASE_API_ADDRESS = 'http://mymemory.translated.net/api/get';
@@ -173,7 +173,9 @@ export default class Translate {
     let user = params.user,
         bot = params.bot,
         message = params.params;
-    bot.sendMessage(config.masterId, message);
+    bot.sendMessage(config.masterId, `New feedback from
+${user.first_name || ''} ${user.last_name || ''} @${user.username || ''} <#${user.id}>
+${message}`);
     return new Promise((res, rej) => {
       res('Thank you so much for giving us your feedback! ^^');
     })
