@@ -1,4 +1,4 @@
-import restler${spaceForNamedImports} from 'restler'
+import restler{spaceForNamedImports} from 'restler'
 import config${spaceForNamedImports} from '../config'
 import * as commandsHelper${spaceForNamedImports} from '../utils/commands'
 import { read, write } from '../utils/files'
