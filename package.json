@@ -1,6 +1,6 @@
 {
   "name": "TLBot",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Telegram @TLBot",
   "main": "index.js",
   "scripts": {

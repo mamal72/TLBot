@@ -172,13 +172,18 @@ export default class Translate {
     let user = params.user,
         bot = params.bot,
         message = params.params;
+    if (!params.trim()) {
+      return new Promise((res, rej) => {
+        res('No feedback message specified!');
+      });
+    }
     bot.sendMessage(config.masterId, `New feedback from
 ${user.first_name || ''} ${user.last_name || ''} @${user.username || ''} <#${user.id}>
 ----------
 ${message}`);
     return new Promise((res, rej) => {
       res('Thank you so much for giving us your feedback! ^^');
-    })
+    });
   }
 
 }
