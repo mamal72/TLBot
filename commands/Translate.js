@@ -172,7 +172,7 @@ export default class Translate {
     let user = params.user,
         bot = params.bot,
         message = params.params;
-    if (!params.trim()) {
+    if (!message.trim()) {
       return new Promise((res, rej) => {
         res('No feedback message specified!');
       });
