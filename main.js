@@ -46,9 +46,14 @@ function getCommand(command) {
 
 function handleCommands(bot, msg) {
 
-  // It's not a comma nd
-  if (!msg.text || !msg.text.indexOf('/') === 0) {
+  // It's not a command
+  if (!msg.text) {
     return false;
+  }
+
+  // Free mode. Translate without any command in privte
+  if (msg.text.indexOf('/') != 0 && msg.chat.id > 0) {
+    msg.text = `/tl ${msg.text}`;
   }
 
   let rawCommand = msg.text;
